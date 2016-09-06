@@ -1,11 +1,13 @@
 import sys
-
+import os
 print sys.path
-sys.path.append('/usr/local/lib/python2.7/site-packages/')
-
+sys.path.append('/usr/local/lib/python2.7/site-packages/')     #for allowing importing cv2 in my mac
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )    #for allowing importing AlarmClock module
 import argparse
 import imutils
 import cv2
+
 from AlarmClock import Camera
 from AlarmClock import Inference
 from AlarmClock import ComputerVision
