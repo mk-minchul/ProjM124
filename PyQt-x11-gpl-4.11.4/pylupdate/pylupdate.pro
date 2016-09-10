@@ -1,0 +1,12 @@
+TARGET = pylupdate4
+TEMPLATE = app
+QT -= gui
+QT += xml
+CONFIG += warn_on release
+CONFIG -= android_install
+target.path = /usr/bin
+INSTALLS += target
+INCLUDEPATH += /home/pi/Github/ProjM124/PyQt-x11-gpl-4.11.4/pylupdate
+VPATH = /home/pi/Github/ProjM124/PyQt-x11-gpl-4.11.4/pylupdate
+HEADERS = translator.h simtexth.h metatranslator.h proparser.h
+SOURCES = main.cpp metatranslator.cpp numberh.cpp fetchtr.cpp translator.cpp simtexth.cpp merge.cpp proparser.cpp sametexth.cpp
