@@ -16,7 +16,7 @@ from PyQt4.QtCore import *
 
 
 class CamScreen(QWidget):
-    Speed = 30
+    Speed = 300
 
     def __init__(self, cam):
         self.cam = cam
