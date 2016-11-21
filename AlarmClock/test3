@@ -1,0 +1,98 @@
+import sys
+import os
+print sys.path
+sys.path.append('/usr/local/lib/python2.7/site-packages/')     #for allowing importing cv2 in my mac
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )    #for allowing importing AlarmClock module
+import argparse
+import imutils
+import cv2
+
+from AlarmClock import Camera
+from AlarmClock import Inference
+from AlarmClock import ComputerVision
+from AlarmClock import Sound
+
+
+import sys
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
+
+
+# construct the argument parse and parse the arguments
+
+ap = argparse.ArgumentParser()
+ap.add_argument("-hr", "--hour", type=int, default=4,
+                help="alarm set at ")
+ap.add_argument("-min", "--minute", type=int, default=5,
+                help="alarm set at ")
+args = vars(ap.parse_args())
+
+
+
+# this is a threaded video stream
+cam = Camera(camnum=0).start()
+print "Starting webcam"
+
+
+
+class MyWindow(QFrame):
+    Speed = 30
+
+    def __init__(self):
+
+        super(MyWindow, self).__init__()
+        self.setWindowTitle("PyStock")
+        self.setGeometry(300, 300, 300, 400)
+
+        #getting the first frame
+        self.frame = cam.read()
+
+        btn1 = QPushButton("Click me", self)
+        btn1.move(40, 20)
+        btn1.clicked.connect(self.btn1_clicked)
+
+        self.timer = QBasicTimer()
+        self.timer.start(MyWindow.Speed, self)
+
+    def btn1_clicked(self):
+        self.frame = cam.read()
+        self.update()
+        QMessageBox.about(self, "message", "clicked")
+
+        print self.frame
+
+    def paintEvent(self, QPaintEvent):
+        # this is called first when the class is initiated
+        # and called whenever self.update() is called.
+        # the camera is updated using this.
+
+        painter = QPainter()
+        painter.begin(self)
+        height, width, byteValue = self.frame.shape
+        byteValue = byteValue * width
+
+        # color is converted to the format that QI image takes.
+        cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB, self.frame)
+
+        self.mQImage = QImage(self.frame, width, height, byteValue, QImage.Format_RGB888)
+
+        painter.drawImage(0, 0, self.mQImage)
+        painter.end()
+
+    def timerEvent(self, event):
+
+        if event.timerId() == self.timer.timerId():
+            self.frame = cam.read()
+            self.update()
+
+        else:
+            super(MyWindow, self).timerEvent(event)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    myWindow = MyWindow()
+    myWindow.show()
+    app.exec_()
+    cam.stop()

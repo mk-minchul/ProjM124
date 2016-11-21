@@ -36,6 +36,7 @@ while True:
     key = cv2.waitKey(1) & 0xFF
     # if the `q` key is pressed, break from the lop
     if key == ord("q"):
+        cam.stop()
         break
 
 # clean up the camera.
