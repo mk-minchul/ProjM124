@@ -36,6 +36,12 @@ class Camera:
         self.frame2 = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         return self.frame2
 
+    def read_raw(self):
+        # return the frame most recently read
+        # first resize the image.
+        self.frame3 = imutils.resize(self.frame, width=self.width)
+        return self.frame3
+
     def stop(self):
         # indicate that the thread should be stopped
         self.stopped = True

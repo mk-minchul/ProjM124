@@ -8,6 +8,8 @@ sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )    #fo
 import cv2
 import pandas as pd
 from PyQt4 import QtGui, QtCore
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 
 import imutils
 from sklearn.externals import joblib
@@ -35,3 +37,25 @@ def light_is_on_off(frame):
         print 'error in light'
     return predicted
 
+class InferenceEngine(QWidget):
+    Speed = 300
+    def __init__(self, cam):
+        self.cam = cam
+        super(InferenceEngine, self).__init__()
+        # getting the first frame
+        self.frame = self.cam.read_raw()
+        var_light = light_is_on_off(self.frame)
+        print var_light
+
+        self.timer = QBasicTimer()
+        self.timer.start(InferenceEngine.Speed, self)
+
+    def timerEvent(self, event):
+
+        if event.timerId() == self.timer.timerId():
+            self.frame = self.cam.read()
+            var_light = light_is_on_off(self.frame)
+            print var_light
+
+        else:
+            super(InferenceEngine, self).timerEvent(event)
