@@ -18,81 +18,53 @@ import sys
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
+from PyQt4 import QtGui, QtCore
 
-# construct the argument parse and parse the arguments
-
-ap = argparse.ArgumentParser()
-ap.add_argument("-hr", "--hour", type=int, default=4,
-                help="alarm set at ")
-ap.add_argument("-min", "--minute", type=int, default=5,
-                help="alarm set at ")
-args = vars(ap.parse_args())
 
 
 
 # this is a threaded video stream
-cam = Camera(camnum=0).start()
+cam = Camera(camnum=0, width= 400).start()
 print "Starting webcam"
 
-
-
-class MyWindow(QFrame):
-    Speed = 30
-
+class UI(QFrame):
     def __init__(self):
+        super(UI, self).__init__()
 
-        super(MyWindow, self).__init__()
-        self.setWindowTitle("PyStock")
-        self.setGeometry(300, 300, 300, 400)
+        self.initUI()
 
-        #getting the first frame
-        self.frame = cam.read()
+    def initUI(self):
+        grid = QtGui.QGridLayout()
+        grid.setSpacing(5)
 
-        btn1 = QPushButton("Click me", self)
-        btn1.move(40, 20)
-        btn1.clicked.connect(self.btn1_clicked)
+        title = QtGui.QLabel('Set Alarm')
+        titleEdit = QtGui.QLineEdit()
+        author = QtGui.QLabel('Train model')
+        authorEdit = QtGui.QLineEdit()
 
-        self.timer = QBasicTimer()
-        self.timer.start(MyWindow.Speed, self)
+        grid.addWidget(title, 1, 0)
+        grid.addWidget(titleEdit, 1, 1)
 
-    def btn1_clicked(self):
-        self.frame = cam.read()
-        self.update()
-        QMessageBox.about(self, "message", "clicked")
+        grid.addWidget(author, 2, 0)
+        grid.addWidget(authorEdit, 2, 1)
 
-        print self.frame
+        btnChooseFile = Sound.BtnChooseFile()
+        grid.addWidget(btnChooseFile, 3, 0)
+        camScreen = ComputerVision.CamScreen(cam)
+        grid.addWidget(camScreen, 3, 1, 5, 1)
 
-    def paintEvent(self, QPaintEvent):
-        # this is called first when the class is initiated
-        # and called whenever self.update() is called.
-        # the camera is updated using this.
+        self.setLayout(grid)
 
-        painter = QPainter()
-        painter.begin(self)
-        height, width, byteValue = self.frame.shape
-        byteValue = byteValue * width
+        self.setGeometry(200, 200, 600, 400)
+        self.setWindowTitle('Review')
+        self.show()
 
-        # color is converted to the format that QI image takes.
-        cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB, self.frame)
 
-        self.mQImage = QImage(self.frame, width, height, byteValue, QImage.Format_RGB888)
-
-        painter.drawImage(0, 0, self.mQImage)
-        painter.end()
-
-    def timerEvent(self, event):
-
-        if event.timerId() == self.timer.timerId():
-            self.frame = cam.read()
-            self.update()
-
-        else:
-            super(MyWindow, self).timerEvent(event)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    myWindow = MyWindow()
+    myWindow = UI()
     myWindow.show()
     app.exec_()
     cam.stop()

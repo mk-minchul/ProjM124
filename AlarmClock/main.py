@@ -13,33 +13,58 @@ from AlarmClock import Inference
 from AlarmClock import ComputerVision
 from AlarmClock import Sound
 
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-hr", "--hour", type=int, default=4,
-                help="alarm set at ")
-ap.add_argument("-min", "--minute", type=int, default=5,
-                help="alarm set at ")
-args = vars(ap.parse_args())
+
+import sys
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
+
+from PyQt4 import QtGui, QtCore
+
 
 
 
 # this is a threaded video stream
-cam = Camera(camnum=0).start()
+cam = Camera(camnum=0, width= 400).start()
 print "Starting webcam"
 
+class UI(QFrame):
+    def __init__(self):
+        super(UI, self).__init__()
 
-while True:
+        self.initUI()
 
-    frame = cam.read()  # grab the frame from the threaded video stream
-    frame = imutils.resize(frame, width=400)  # resize the frame to have 400 pixel width
-    cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1) & 0xFF
-    # if the `q` key is pressed, break from the lop
-    if key == ord("q"):
-        cam.stop()
-        break
+    def initUI(self):
+        grid = QtGui.QGridLayout()
+        grid.setSpacing(5)
 
-# clean up the camera.
-cv2.destroyAllWindows()
-cam.stop()
-print "Done"
+        title = QtGui.QLabel('Set Alarm')
+        titleEdit = QtGui.QLineEdit()
+        author = QtGui.QLabel('Train model')
+        authorEdit = QtGui.QLineEdit()
+
+        grid.addWidget(title, 1, 0)
+        grid.addWidget(titleEdit, 1, 1)
+
+        grid.addWidget(author, 2, 0)
+        grid.addWidget(authorEdit, 2, 1)
+
+        btnChooseFile = Sound.BtnChooseFile()
+        grid.addWidget(btnChooseFile, 3, 0)
+        camScreen = ComputerVision.CamScreen(cam)
+        grid.addWidget(camScreen, 3, 1, 5, 1)
+
+        self.setLayout(grid)
+
+        self.setGeometry(200, 200, 600, 400)
+        self.setWindowTitle('Review')
+        self.show()
+
+
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    myWindow = UI()
+    myWindow.show()
+    app.exec_()
+    cam.stop()

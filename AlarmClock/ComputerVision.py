@@ -1,82 +1,66 @@
-import cv2
+import sys
+import os
+print sys.path
+sys.path.append('/usr/local/lib/python2.7/site-packages/')     #for allowing importing cv2 in my mac
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )    #for allowing importing AlarmClock module
+import argparse
 import imutils
+import cv2
+
+from AlarmClock import Camera
 
 
-def get_first_frame(frame, width, blur):
-    """
-
-    :param frame: frame grabbed from calling 'camera1 = cv2.VideoCapture( camnum ) \ camera1.read()'
-    :param width: desired width of the frame ex) 200. If 0, no blur.
-    :param blur: desired blur parameter ex) 31
-    :return: gray scaled blurred and reshaped frame.
-    """
-    frame = imutils.resize(frame, width=width)
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    if blur != 0:
-        gray = cv2.GaussianBlur(gray, (blur, blur), 0)
-    first_frame = gray
-    return first_frame
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 
 
-def detect_movements(first_frame, frame, width, blur, minimum_area):
-    """
+class CamScreen(QWidget):
+    Speed = 30
 
-    :param first_frame:
-    :param frame:
-    :param width:
-    :param blur:
-    :param minimum_area:
-    :return:
-    """
-    text = 'no movement'
-    # resize the frame, convert it to grayscale, and blur it
-    frame = imutils.resize(frame, width=width)
+    def __init__(self, cam):
+        self.cam = cam
+        super(CamScreen, self).__init__()
+        self.setWindowTitle("CamScreen")
+        self.setGeometry(300, 300, 400, 300)
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    gray = cv2.GaussianBlur(gray, (blur, blur), 0)
+        #getting the first frame
+        self.frame = self.cam.read()
 
-    # compute the absolute difference between the current frame and
-    frameDelta = cv2.absdiff(first_frame, gray)
-    thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
+        btn1 = QPushButton("Click me", self)
+        btn1.move(40, 20)
+        btn1.clicked.connect(self.btn1_clicked)
 
-    # dilate the thresholded image to fill in holes, then find contours
-    # on thresholded image
-    thresh = cv2.dilate(thresh, None, iterations=2)
+        self.timer = QBasicTimer()
+        self.timer.start(CamScreen.Speed, self)
 
-    (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    def btn1_clicked(self):
+        self.frame = self.cam.read()
+        self.update()
+        QMessageBox.about(self, "message", "clicked")
 
-    # loop over the contours
-    for c in cnts:
-        # if the contour is too small, ignore it
-        if cv2.contourArea(c) < minimum_area:
-            continue
+        print self.frame
 
-        # compute the bounding box for the contour, draw it on the frame,
-        # and update the text
-        (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        text = "movement"
+    def paintEvent(self, QPaintEvent):
+        # this is called first when the class is initiated
+        # and called whenever self.update() is called.
+        # the camera is updated using this.
 
-    return text, frame
+        painter = QPainter()
+        painter.begin(self)
+        height, width, byteValue = self.frame.shape
+        byteValue = byteValue * width
 
+        self.mQImage = QImage(self.frame, width, height, byteValue, QImage.Format_RGB888)
 
-def put_text(frame, var_bed, var_move, var_time, alarm_start, var_light):
-    import datetime
+        painter.drawImage(0, 0, self.mQImage)
+        painter.end()
 
-    cv2.putText(frame, "{}".format(var_move), (10, 20),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, "{}".format(var_time), (10, 32),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, "alarm set at", (10, 44),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, alarm_start.strftime("%A %d %B %H:%M"),
-                (10, 54), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, "{}".format(var_bed), (10, 66),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, "{}".format(var_light), (10, 76),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y"),
-                (10, frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    cv2.putText(frame, datetime.datetime.now().strftime("%H:%M:%S"),
-                (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-    return frame
+    def timerEvent(self, event):
+
+        if event.timerId() == self.timer.timerId():
+            self.frame = self.cam.read()
+            self.update()
+
+        else:
+            super(CamScreen, self).timerEvent(event)
