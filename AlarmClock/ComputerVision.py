@@ -9,6 +9,7 @@ import imutils
 import cv2
 
 from AlarmClock import Camera
+from AlarmClock import Inference
 
 
 from PyQt4.QtGui import *
@@ -40,6 +41,8 @@ class CamScreen(QWidget):
         QMessageBox.about(self, "message", "clicked")
 
         print self.frame
+        var_light = Inference.light_is_on_off(self.frame)
+        print var_light
 
     def paintEvent(self, QPaintEvent):
         # this is called first when the class is initiated
