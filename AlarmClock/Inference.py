@@ -22,3 +22,4 @@ def determine_sleepingtime(h, m, duration):
         day = tomorrow.day
         return datetime.datetime(year, month, day, h, m), \
                datetime.datetime(year, month, day, h, m) + datetime.timedelta(hours=duration)
+

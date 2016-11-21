@@ -50,7 +50,7 @@ class UI(QFrame):
 
         btnChooseFile = Sound.BtnChooseFile()
         grid.addWidget(btnChooseFile, 3, 0)
-        camScreen = ComputerVision.CamScreen(cam)
+        camScreen = CamScreen()
         grid.addWidget(camScreen, 3, 1, 5, 1)
 
         self.setLayout(grid)
@@ -59,6 +59,56 @@ class UI(QFrame):
         self.setWindowTitle('Review')
         self.show()
 
+
+class CamScreen(QWidget):
+    Speed = 30
+
+    def __init__(self):
+
+        super(CamScreen, self).__init__()
+        self.setWindowTitle("CamScreen")
+        self.setGeometry(300, 300, 400, 300)
+
+        #getting the first frame
+        self.frame = cam.read()
+
+        btn1 = QPushButton("Click me", self)
+        btn1.move(40, 20)
+        btn1.clicked.connect(self.btn1_clicked)
+
+        self.timer = QBasicTimer()
+        self.timer.start(CamScreen.Speed, self)
+
+    def btn1_clicked(self):
+        self.frame = cam.read()
+        self.update()
+        QMessageBox.about(self, "message", "clicked")
+
+        print self.frame
+
+    def paintEvent(self, QPaintEvent):
+        # this is called first when the class is initiated
+        # and called whenever self.update() is called.
+        # the camera is updated using this.
+
+        painter = QPainter()
+        painter.begin(self)
+        height, width, byteValue = self.frame.shape
+        byteValue = byteValue * width
+
+        self.mQImage = QImage(self.frame, width, height, byteValue, QImage.Format_RGB888)
+
+        painter.drawImage(0, 0, self.mQImage)
+        painter.end()
+
+    def timerEvent(self, event):
+
+        if event.timerId() == self.timer.timerId():
+            self.frame = cam.read()
+            self.update()
+
+        else:
+            super(CamScreen, self).timerEvent(event)
 
 
 
