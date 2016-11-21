@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08454b15-4402-4f11-ad81-d989bd8bcb26" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/1-05 시편 139편.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-01-사랑은 여기 있으니-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-02-You Still Love Me-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-03-내게 주신 은혜-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-04-주 사랑이 내게 들어와-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-05-그가 내 안에-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-06-Love Never Fails (부제 ; 여호와께 돌아가자)-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-07-새로운 계명을-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-08-그 사랑으로 우리-320k.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlarmClock/Sound/Songs/제이어스(J-US)-09-날 사랑하는 이-320k.mp3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/Alarm.py" afterPath="$PROJECT_DIR$/AlarmClock/Alarm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/Inference.py" afterPath="$PROJECT_DIR$/AlarmClock/Inference.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/Sound.py" afterPath="$PROJECT_DIR$/AlarmClock/Sound.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/test3" afterPath="$PROJECT_DIR$/AlarmClock/test3" />
     </list>
     <ignored path="ProjM124.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -215,6 +221,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AlarmClock" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjM124" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjM124" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AlarmClock" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sound" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Songs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -591,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479757559803</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added SoundEngine">
+      <created>1479761700849</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1479761700849</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -605,9 +640,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="827" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24876674" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24876674" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292517" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292517" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -650,7 +685,8 @@
     <MESSAGE value="added svm_model.pkl" />
     <MESSAGE value="added inference_engine" />
     <MESSAGE value="added isalarmtime" />
-    <option name="LAST_COMMIT_MESSAGE" value="added isalarmtime" />
+    <MESSAGE value="added SoundEngine" />
+    <option name="LAST_COMMIT_MESSAGE" value="added SoundEngine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
