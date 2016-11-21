@@ -47,7 +47,7 @@ class Alarm(QtGui.QWidget):
         #define what you do in every loop
         if event.timerId() == self.timer.timerId():
             self.IS_ALARM_TIME = (self.beg <= datetime.datetime.now() <= self.end)
-            print self.IS_ALARM_TIME
+            print self.IS_ALARM_TIME, "is alarm time"
         else:
             super(Alarm, self).timerEvent(event)
 

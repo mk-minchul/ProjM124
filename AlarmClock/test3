@@ -64,6 +64,9 @@ class UI(QFrame):
         inference_engine = Inference.InferenceEngine(cam)
         grid.addWidget(inference_engine, 4, 0, 1, 1)
 
+        sound_engine = Sound.SoundEngine(inference_engine, alarm)
+        grid.addWidget(sound_engine, 4, 0, 1, 2)
+
         self.setLayout(grid)
 
         self.setGeometry(200, 200, 600, 400)

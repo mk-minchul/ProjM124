@@ -56,6 +56,6 @@ class InferenceEngine(QWidget):
         if event.timerId() == self.timer.timerId():
             self.frame = self.cam.read_raw()
             self.IS_LIGHT_ON = light_is_on_off(self.frame)
-            print self.IS_LIGHT_ON
+            #self.IS_LIGHT_ON = False
         else:
             super(InferenceEngine, self).timerEvent(event)
