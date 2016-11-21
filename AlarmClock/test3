@@ -12,7 +12,7 @@ from AlarmClock import Camera
 from AlarmClock import Inference
 from AlarmClock import ComputerVision
 from AlarmClock import Sound
-
+from AlarmClock import Alarm
 
 import sys
 from PyQt4.QtGui import *
@@ -25,6 +25,9 @@ from PyQt4 import QtGui, QtCore
 
 # this is a threaded video stream
 cam = Camera(camnum=0, width= 400).start()
+
+#set initial alarm time
+alarm = Alarm.Alarm()
 print "Starting webcam"
 
 class UI(QFrame):
@@ -37,20 +40,21 @@ class UI(QFrame):
         grid = QtGui.QGridLayout()
         grid.setSpacing(5)
 
-        title = QtGui.QLabel('Set Alarm')
-        titleEdit = QtGui.QLineEdit()
-        author = QtGui.QLabel('Train model')
-        authorEdit = QtGui.QLineEdit()
+        currentTimeLbl = QtGui.QLabel('Current time')
+        currentTime = Alarm.CurrentTimeLabel()
+        grid.addWidget(currentTimeLbl, 1, 0)
+        grid.addWidget(currentTime, 1, 1)
 
-        grid.addWidget(title, 1, 0)
-        grid.addWidget(titleEdit, 1, 1)
 
-        grid.addWidget(author, 2, 0)
-        grid.addWidget(authorEdit, 2, 1)
+        alarmTime = Alarm.CurrentAlarmLabel(alarm)
+        btnSetAlarm = Alarm.SetAlarmButton(alarm, alarmTime)
+
+        grid.addWidget(btnSetAlarm, 2, 0)
+        grid.addWidget(alarmTime, 2, 1)
 
         btnChooseFile = Sound.BtnChooseFile()
         grid.addWidget(btnChooseFile, 3, 0)
-        camScreen = CamScreen()
+        camScreen = ComputerVision.CamScreen(cam)
         grid.addWidget(camScreen, 3, 1, 5, 1)
 
         self.setLayout(grid)
@@ -59,56 +63,6 @@ class UI(QFrame):
         self.setWindowTitle('Review')
         self.show()
 
-
-class CamScreen(QWidget):
-    Speed = 30
-
-    def __init__(self):
-
-        super(CamScreen, self).__init__()
-        self.setWindowTitle("CamScreen")
-        self.setGeometry(300, 300, 400, 300)
-
-        #getting the first frame
-        self.frame = cam.read()
-
-        btn1 = QPushButton("Click me", self)
-        btn1.move(40, 20)
-        btn1.clicked.connect(self.btn1_clicked)
-
-        self.timer = QBasicTimer()
-        self.timer.start(CamScreen.Speed, self)
-
-    def btn1_clicked(self):
-        self.frame = cam.read()
-        self.update()
-        QMessageBox.about(self, "message", "clicked")
-
-        print self.frame
-
-    def paintEvent(self, QPaintEvent):
-        # this is called first when the class is initiated
-        # and called whenever self.update() is called.
-        # the camera is updated using this.
-
-        painter = QPainter()
-        painter.begin(self)
-        height, width, byteValue = self.frame.shape
-        byteValue = byteValue * width
-
-        self.mQImage = QImage(self.frame, width, height, byteValue, QImage.Format_RGB888)
-
-        painter.drawImage(0, 0, self.mQImage)
-        painter.end()
-
-    def timerEvent(self, event):
-
-        if event.timerId() == self.timer.timerId():
-            self.frame = cam.read()
-            self.update()
-
-        else:
-            super(CamScreen, self).timerEvent(event)
 
 
 

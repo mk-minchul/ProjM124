@@ -12,7 +12,7 @@ from AlarmClock import Camera
 from AlarmClock import Inference
 from AlarmClock import ComputerVision
 from AlarmClock import Sound
-
+from AlarmClock import Alarm
 
 import sys
 from PyQt4.QtGui import *
@@ -25,6 +25,9 @@ from PyQt4 import QtGui, QtCore
 
 # this is a threaded video stream
 cam = Camera(camnum=0, width= 400).start()
+
+#set initial alarm time
+alarm = Alarm.Alarm()
 print "Starting webcam"
 
 class UI(QFrame):
@@ -37,16 +40,17 @@ class UI(QFrame):
         grid = QtGui.QGridLayout()
         grid.setSpacing(5)
 
-        title = QtGui.QLabel('Set Alarm')
-        titleEdit = QtGui.QLineEdit()
-        author = QtGui.QLabel('Train model')
-        authorEdit = QtGui.QLineEdit()
+        currentTimeLbl = QtGui.QLabel('Current time')
+        currentTime = Alarm.CurrentTimeLabel()
+        grid.addWidget(currentTimeLbl, 1, 0)
+        grid.addWidget(currentTime, 1, 1)
 
-        grid.addWidget(title, 1, 0)
-        grid.addWidget(titleEdit, 1, 1)
 
-        grid.addWidget(author, 2, 0)
-        grid.addWidget(authorEdit, 2, 1)
+        alarmTime = Alarm.CurrentAlarmLabel(alarm)
+        btnSetAlarm = Alarm.SetAlarmButton(alarm, alarmTime)
+
+        grid.addWidget(btnSetAlarm, 2, 0)
+        grid.addWidget(alarmTime, 2, 1)
 
         btnChooseFile = Sound.BtnChooseFile()
         grid.addWidget(btnChooseFile, 3, 0)
