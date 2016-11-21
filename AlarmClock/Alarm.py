@@ -26,15 +26,30 @@ def determine_sleepingtime(h, m, duration):
                datetime.datetime(year, month, day, h, m) + datetime.timedelta(hours=duration)
 
 
-class Alarm:
+class Alarm(QtGui.QWidget):
+    Speed = 300
     def __init__(self, h = 5, m = 30, dur = 1):
         self.beg, self.end = determine_sleepingtime(h, m, dur)
+        self.IS_ALARM_TIME = False
+        super(Alarm, self).__init__()
+        # getting the first frame
+        self.timer = QtCore.QBasicTimer()
+        self.timer.start(Alarm.Speed, self)
+
 
     def set(self, h, m, dur):
         self.beg, self.end = determine_sleepingtime(h, m, dur)
 
     def get(self):
         return self.beg, self.end
+
+    def timerEvent(self, event):
+        #define what you do in every loop
+        if event.timerId() == self.timer.timerId():
+            self.IS_ALARM_TIME = (self.beg <= datetime.datetime.now() <= self.end)
+            print self.IS_ALARM_TIME
+        else:
+            super(Alarm, self).timerEvent(event)
 
 class CurrentTimeLabel(QtGui.QLabel):
     Speed = 300

@@ -60,7 +60,7 @@ class CamScreen(QWidget):
         painter.end()
 
     def timerEvent(self, event):
-
+        #defines what you do in every loop
         if event.timerId() == self.timer.timerId():
             self.frame = self.cam.read()
             self.update()

@@ -29,33 +29,33 @@ def light_is_on_off(frame):
     df = df / 255.  # it is divided by 255 in making the model
     predicted = model.predict(df)
     if predicted == 'T':
-        predicted = 'light on'
+        predicted = True
     elif predicted == 'F':
-        predicted = 'light off'
+        predicted = False
     else:
-        predicted = 'error'
+        predicted = False
         print 'error in light'
     return predicted
 
 class InferenceEngine(QWidget):
     Speed = 300
+
     def __init__(self, cam):
         self.cam = cam
         super(InferenceEngine, self).__init__()
         # getting the first frame
         self.frame = self.cam.read_raw()
-        var_light = light_is_on_off(self.frame)
-        print var_light
-
+        #initializing the variable
+        self.IS_LIGHT_ON = True
         self.timer = QBasicTimer()
         self.timer.start(InferenceEngine.Speed, self)
 
     def timerEvent(self, event):
+        #define what you do in every loop
 
         if event.timerId() == self.timer.timerId():
-            self.frame = self.cam.read()
-            var_light = light_is_on_off(self.frame)
-            print var_light
-
+            self.frame = self.cam.read_raw()
+            self.IS_LIGHT_ON = light_is_on_off(self.frame)
+            print self.IS_LIGHT_ON
         else:
             super(InferenceEngine, self).timerEvent(event)

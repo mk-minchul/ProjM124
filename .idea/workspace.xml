@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="08454b15-4402-4f11-ad81-d989bd8bcb26" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/Camera.py" afterPath="$PROJECT_DIR$/AlarmClock/Camera.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/Alarm.py" afterPath="$PROJECT_DIR$/AlarmClock/Alarm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/ComputerVision.py" afterPath="$PROJECT_DIR$/AlarmClock/ComputerVision.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/Inference.py" afterPath="$PROJECT_DIR$/AlarmClock/Inference.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlarmClock/test3" afterPath="$PROJECT_DIR$/AlarmClock/test3" />
     </list>
@@ -29,8 +30,8 @@
       <file leaf-file-name="ComputerVision.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AlarmClock/ComputerVision.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="35" selection-end-column="47" />
+            <state relative-caret-position="438">
+              <caret line="62" column="42" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -41,8 +42,8 @@
       <file leaf-file-name="Inference.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AlarmClock/Inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="348">
+              <caret line="58" column="34" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -63,7 +64,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AlarmClock/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
+            <state relative-caret-position="645">
               <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -75,8 +76,8 @@
       <file leaf-file-name="test3" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AlarmClock/test3">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="213">
+              <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -87,8 +88,8 @@
       <file leaf-file-name="Alarm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AlarmClock/Alarm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="375">
+              <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -144,12 +145,12 @@
         <option value="$PROJECT_DIR$/Alarmclock_Action_Log-20160910.ipynb" />
         <option value="$PROJECT_DIR$/AlarmClock/test4.py" />
         <option value="$PROJECT_DIR$/AlarmClock/Sound.py" />
-        <option value="$PROJECT_DIR$/AlarmClock/Alarm.py" />
         <option value="$PROJECT_DIR$/AlarmClock/main.py" />
         <option value="$PROJECT_DIR$/AlarmClock/Camera.py" />
         <option value="$PROJECT_DIR$/AlarmClock/ComputerVision.py" />
-        <option value="$PROJECT_DIR$/AlarmClock/Inference.py" />
         <option value="$PROJECT_DIR$/AlarmClock/test3" />
+        <option value="$PROJECT_DIR$/AlarmClock/Inference.py" />
+        <option value="$PROJECT_DIR$/AlarmClock/Alarm.py" />
       </list>
     </option>
   </component>
@@ -576,7 +577,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479753320179</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added inference_engine">
+      <created>1479755883750</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1479755883750</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -633,7 +641,8 @@
     <MESSAGE value="added setAlarm" />
     <MESSAGE value="added lightisonoff" />
     <MESSAGE value="added svm_model.pkl" />
-    <option name="LAST_COMMIT_MESSAGE" value="added svm_model.pkl" />
+    <MESSAGE value="added inference_engine" />
+    <option name="LAST_COMMIT_MESSAGE" value="added inference_engine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -971,26 +980,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AlarmClock/Sound.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AlarmClock/Alarm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AlarmClock/Camera.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
@@ -1003,18 +992,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AlarmClock/ComputerVision.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="35" selection-end-column="47" />
+        <state relative-caret-position="438">
+          <caret line="62" column="42" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AlarmClock/Inference.py">
+    <entry file="file://$PROJECT_DIR$/AlarmClock/Sound.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AlarmClock/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -1029,20 +1028,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AlarmClock/main.py">
+    <entry file="file://$PROJECT_DIR$/AlarmClock/Inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="348">
+          <caret line="58" column="34" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AlarmClock/Alarm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AlarmClock/test3">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="213">
+          <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
