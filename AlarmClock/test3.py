@@ -67,6 +67,9 @@ class UI(QFrame):
         sound_engine = Sound.SoundEngine(inference_engine, alarm)
         grid.addWidget(sound_engine, 4, 0, 1, 2)
 
+        btnGetSample = Inference.BtnGetSample(cam)
+        grid.addWidget(btnGetSample, 5, 0)
+
         self.setLayout(grid)
 
         self.setGeometry(200, 200, 600, 400)

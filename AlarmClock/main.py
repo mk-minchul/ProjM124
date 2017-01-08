@@ -27,7 +27,8 @@ from PyQt4 import QtGui, QtCore
 cam = Camera(camnum=0, width= 400).start()
 
 #set initial alarm time
-alarm = Alarm.Alarm()
+
+
 print "Starting webcam"
 
 class UI(QFrame):
@@ -37,6 +38,8 @@ class UI(QFrame):
         self.initUI()
 
     def initUI(self):
+
+
         grid = QtGui.QGridLayout()
         grid.setSpacing(5)
 
@@ -45,17 +48,24 @@ class UI(QFrame):
         grid.addWidget(currentTimeLbl, 1, 0)
         grid.addWidget(currentTime, 1, 1)
 
-
+        alarm = Alarm.Alarm()
         alarmTime = Alarm.CurrentAlarmLabel(alarm)
         btnSetAlarm = Alarm.SetAlarmButton(alarm, alarmTime)
 
         grid.addWidget(btnSetAlarm, 2, 0)
         grid.addWidget(alarmTime, 2, 1)
+        grid.addWidget(alarm,2,2)
 
         btnChooseFile = Sound.BtnChooseFile()
         grid.addWidget(btnChooseFile, 3, 0)
         camScreen = ComputerVision.CamScreen(cam)
         grid.addWidget(camScreen, 3, 1, 5, 1)
+
+        inference_engine = Inference.InferenceEngine(cam)
+        grid.addWidget(inference_engine, 4, 0, 1, 1)
+
+        sound_engine = Sound.SoundEngine(inference_engine, alarm)
+        grid.addWidget(sound_engine, 4, 0, 1, 2)
 
         self.setLayout(grid)
 
