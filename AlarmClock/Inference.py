@@ -60,6 +60,57 @@ def take_picture(time_in_between, num_pic, cam):
     print "%d pictures taken" %num_pic
     return df
 
+class BtnSetModel(QtGui.QPushButton):
+
+    def __init__(self):
+        QtGui.QPushButton.__init__(self, "Set Model")
+        self.clicked.connect(self.handleButton)
+
+    def handleButton(self):
+        fname = QFileDialog.getOpenFileName(self, 'Open file', "model files (*.pkl)")
+        print fname
+        InferenceEngine.model = joblib.load(str(fname))
+
+class BtnMakeModel(QtGui.QPushButton):
+
+    def __init__(self):
+        QtGui.QPushButton.__init__(self, "Make Model")
+        self.clicked.connect(self.handleButton)
+
+    def handleButton(self):
+        model_directory = os.getcwd() + "/Model"
+        if not os.path.exists(model_directory):
+            os.makedirs(model_directory)
+
+class CheckBoxLightOnOff(QtGui.QCheckBox):
+    selected = False
+    def __init__(self):
+        QtGui.QCheckBox.__init__(self)
+        self.clicked.connect(self.handleCheck)
+
+    def handleCheck(self):
+        if CheckBoxLightOnOff.selected == True:
+            CheckBoxLightOnOff.selected = False
+            print "selected is ", CheckBoxLightOnOff.selected
+        else:
+            CheckBoxLightOnOff.selected = True
+            print "selected is ", CheckBoxLightOnOff.selected
+
+class QLineEditNumSample(QtGui.QLineEdit):
+    numSample = 0
+    def __init__(self):
+        QtGui.QLineEdit.__init__(self)
+
+    def keyPressEvent(self, event):
+        # call base class keyPressEvent
+        QtGui.QLineEdit.keyPressEvent(self, event)
+        try:
+            QLineEditNumSample.numSample = int(self.text())
+        except:
+            print "Type integer."
+            QLineEditNumSample.numSample = 0
+
+
 class BtnGetSample(QtGui.QPushButton):
     # creating a class variable "state" so that it can be used by the InferenceEngine class.
     # if it was created within init as self, then it would just be used as an instance variable
@@ -79,7 +130,8 @@ class BtnGetSample(QtGui.QPushButton):
             #setting the class variable to running.
             BtnGetSample.state_get_sample = True
             self.setText("Stop")
-            new_frame = take_picture(0.2, 3, self.cam)
+            new_frame = take_picture(0.2, QLineEditNumSample.numSample, self.cam)
+            new_frame['light'] = CheckBoxLightOnOff.selected
             print new_frame
 
             # the stop button is actually not working because
@@ -95,7 +147,7 @@ class BtnGetSample(QtGui.QPushButton):
 
 
 class InferenceEngine(QWidget):
-    Speed = 300
+    Speed = 3000
 
     def __init__(self, cam):
         self.cam = cam

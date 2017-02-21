@@ -70,7 +70,33 @@ class UI(QFrame):
         btnGetSample = Inference.BtnGetSample(cam)
         grid.addWidget(btnGetSample, 5, 0)
 
+        # adding a radio button and a number of Sample .. still need to reference it from the inference get sample..
+        lightBtnGroup = QtGui.QButtonGroup()
+        light0 = QtGui.QRadioButton("light on")
+        light0.setChecked(True)
+        lightBtnGroup.addButton(light0)
+        light1 = QtGui.QRadioButton("light off")
+        lightBtnGroup.addButton(light1)
+        numSampleTE = QtGui.QLineEdit()
+        grid.addWidget(light0,6,0)
+        grid.addWidget(light1,7,0)
+        grid.addWidget(numSampleTE,8,0)
+
+
+        btnChooseModel = Inference.BtnSetModel()
+        btnMakeModel = Inference.BtnMakeModel()
+        grid.addWidget(btnChooseModel, 9,0)
+        grid.addWidget(btnMakeModel, 10, 0)
+
+        CheckBoxLight = Inference.CheckBoxLightOnOff()
+        grid.addWidget(CheckBoxLight, 11, 0)
+
+        numSample = Inference.QLineEditNumSample()
+        grid.addWidget(numSample, 12, 0)
+
         self.setLayout(grid)
+
+
 
         self.setGeometry(200, 200, 600, 400)
         self.setWindowTitle('Review')
